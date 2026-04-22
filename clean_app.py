@@ -6,7 +6,7 @@ import time
 # 페이지 설정
 st.set_page_config(page_title="청소 배정기", page_icon="🧹")
 
-st.markdown("<h1 style='text-align: center; font-size: 60px;'>🧹 스마트 청소 배정</h1>", unsafe_allow_html=True)
+st.markdown("<h2 style='text-align: center; font-size: 60px;'>🧹 스마트 청소 배정</h2>", unsafe_allow_html=True)
 
 # 설명 문구 (사이드바 혹은 메인에 배치)
 st.markdown("""
