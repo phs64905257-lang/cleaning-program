@@ -37,7 +37,7 @@ with st.sidebar:
 
 # 2. 메인 화면 - 명단 업로드
 st.subheader("1. 학생 명단 준비")
-uploaded_file = st.file_uploader("1열 [이름] 컬럼이 포함된 엑셀/CSV 파일을 업로드하세요.", type=["xlsx", "csv"])
+uploaded_file = st.file_uploader("1행 [이름] 컬럼이 포함된 엑셀/CSV 파일을 업로드하세요.", type=["xlsx", "csv"])
 
 if uploaded_file:
     if uploaded_file.name.endswith('.csv'):
