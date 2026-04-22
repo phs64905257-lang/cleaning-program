@@ -58,20 +58,7 @@ if total_needed != len(student_list):
     st.error(f"🚨 무결성 오류: 설정된 구역 인원 합({total_needed}명)과 학생 수({len(student_list)}명)가 일치해야 합니다!")
 else:
     # 버튼 문구 유지
-    if st.button("🎰 슬롯머신 배정 시작!", type="primary"):
-        
-        # --- 슬롯머신 애니메이션 구역 ---
-        placeholder = st.empty() # 애니메이션이 표시될 임시 공간
-        
-        for i in range(15): # 15번 빠르게 바뀜
-            # 임시로 섞인 명단에서 샘플 추출
-            sample_names = random.sample(student_list, min(3, len(student_list)))
-            display_text = " | ".join(sample_names)
-            placeholder.markdown(f"### 🎲 추첨 중... \n ## {display_text}")
-            time.sleep(0.1) # 0.1초 간격
-        
-        placeholder.empty() # 애니메이션 공간 삭제
-        # ---------------------------
+    if st.button("🎰 배정 시작!", type="primary"):
 
         # 실제 배정 로직
         random.shuffle(student_list)
