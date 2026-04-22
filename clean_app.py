@@ -85,6 +85,18 @@ else:
         
         # 풍선 효과
         st.balloons()
+
+        # 팡파르 효과음 (HTML5 오디오 태그 활용)
+        audio_url = "https://actions.google.com/sounds/v1/cartoon/clown_horn.ogg" # 빵파르 느낌의 소리
+        st.components.v1.html(
+            f"""
+            <audio autoplay>
+                <source src="{audio_url}" type="audio/ogg">
+            </audio>
+            """,
+            height=0,
+        )
+        # ---------------------------------------------------------
         
         # 결과 표시
         st.success("🎉 배정이 완료되었습니다!")
@@ -99,6 +111,7 @@ else:
                 st.markdown(f"**[{sec}]**")
                 st.write(f"{', '.join(names)}")
             res_df_list.append({"구역": sec, "배정인원": ", ".join(names)})
+
         
         # 4. 저장 기능 (웹에서는 다운로드 방식)
         res_df = pd.DataFrame(res_df_list)
