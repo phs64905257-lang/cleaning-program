@@ -4,7 +4,7 @@ import random
 import time
 
 # 페이지 설정
-st.set_page_config(page_title="청소 배정기", page_icon="🧹")
+st.set_page_config(page_title="스마트 청소배정", page_icon="🧹")
 
 st.markdown("<h5 style='text-align: center; font-size: 60px;'>🧹 스마트 청소 배정</h5>", unsafe_allow_html=True)
 
