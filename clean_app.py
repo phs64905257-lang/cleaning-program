@@ -50,7 +50,7 @@ else:
     student_list = [f"학생 {i+1}" for i in range(student_count)]
     st.warning("⚠️ 파일이 없어 임시 명단(학생 1, 2...)을 사용합니다.")
 
-# 3. 배정 실행 (슬롯머신 효과 추가)
+# 3. 배정 실행
 st.divider()
 st.subheader("2. 배정 실행")
 
@@ -72,19 +72,7 @@ else:
         
         # 풍선 효과
         st.balloons()
-
-        # 팡파르 효과음 (HTML5 오디오 태그 활용)
-        audio_url = "https://actions.google.com/sounds/v1/cartoon/clown_horn.ogg" # 빵파르 느낌의 소리
-        st.components.v1.html(
-            f"""
-            <audio autoplay>
-                <source src="{audio_url}" type="audio/ogg">
-            </audio>
-            """,
-            height=0,
-        )
-        # ---------------------------------------------------------
-        
+    
         # 결과 표시
         st.success("🎉 배정이 완료되었습니다!")
         
