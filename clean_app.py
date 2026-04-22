@@ -7,7 +7,7 @@ import time
 st.set_page_config(page_title="중1-2반 청소 배정기", page_icon="🧹")
 
 st.title("🧹 2026 스마트 청소 배정 시스템")
-st.info("중학교 1학년 담임 선생님들을 위한 공정한 청소 배정 도구입니다.")
+st.info("담임 선생님들을 위한 랜덤 청소 배정 도구입니다.")
 
 # 1. 사이드바 - 설정 영역
 with st.sidebar:
