@@ -6,7 +6,7 @@ import time
 # 페이지 설정
 st.set_page_config(page_title="중1-2반 청소 배정기", page_icon="🧹")
 
-st.title("🧹 2026 스마트 청소 배정 시스템")
+st.title("🧹 스마트 청소 배정 시스템")
 st.info("담임 선생님들을 위한 랜덤 청소 배정 도구입니다.")
 
 # 1. 사이드바 - 설정 영역
@@ -30,7 +30,7 @@ with st.sidebar:
 
 # 2. 메인 화면 - 명단 업로드
 st.subheader("1. 학생 명단 준비")
-uploaded_file = st.file_uploader("이름 컬럼이 포함된 엑셀/CSV 파일을 업로드하세요.", type=["xlsx", "csv"])
+uploaded_file = st.file_uploader("1열 [이름] 컬럼이 포함된 엑셀/CSV 파일을 업로드하세요.", type=["xlsx", "csv"])
 
 if uploaded_file:
     if uploaded_file.name.endswith('.csv'):
