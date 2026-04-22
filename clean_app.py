@@ -50,40 +50,54 @@ else:
     student_list = [f"학생 {i+1}" for i in range(student_count)]
     st.warning("⚠️ 파일이 없어 임시 명단(학생 1, 2...)을 사용합니다.")
 
-# 3. 배정 로직 및 애니메이션
+# 3. 배정 실행 (슬롯머신 효과 추가)
+st.divider()
 st.subheader("2. 배정 실행")
 
-# 무결성 체크
 if total_needed != len(student_list):
-    st.error(f"🚨 무결성 오류: 구역 인원 합({total_needed})과 학생 수({len(student_list)})가 일치해야 합니다!")
+    st.error(f"🚨 무결성 오류: 설정된 구역 인원 합({total_needed}명)과 학생 수({len(student_list)}명)가 일치해야 합니다!")
 else:
+    # 버튼 문구 유지
     if st.button("🎰 슬롯머신 배정 시작!", type="primary"):
-        with st.status("🎲 무작위 추첨 중...", expanded=True) as status:
-            time.sleep(1)
-            st.write("학생 명단 셔플 중...")
-            random.shuffle(student_list)
-            time.sleep(1)
-            st.write("구역별 인원 배치 중...")
-            
-            # 배정 계산
-            results = {}
-            current_idx = 0
-            for _, row in edited_sections.iterrows():
-                sec_name = row["구역명"]
-                sec_count = row["인원"]
-                results[sec_name] = student_list[current_idx : current_idx + sec_count]
-                current_idx += sec_count
-            
-            status.update(label="배정 완료!", state="complete", expanded=False)
         
-        # 슬롯머신 효과(풍선)
+        # --- 슬롯머신 애니메이션 구역 ---
+        placeholder = st.empty() # 애니메이션이 표시될 임시 공간
+        
+        for i in range(15): # 15번 빠르게 바뀜
+            # 임시로 섞인 명단에서 샘플 추출
+            sample_names = random.sample(student_list, min(3, len(student_list)))
+            display_text = " | ".join(sample_names)
+            placeholder.markdown(f"### 🎲 추첨 중... \n ## {display_text}")
+            time.sleep(0.1) # 0.1초 간격
+        
+        placeholder.empty() # 애니메이션 공간 삭제
+        # ---------------------------
+
+        # 실제 배정 로직
+        random.shuffle(student_list)
+        results = {}
+        current_idx = 0
+        for _, row in edited_sections.iterrows():
+            sec_name = row["구역명"]
+            sec_count = int(row["인원"])
+            results[sec_name] = student_list[current_idx : current_idx + sec_count]
+            current_idx += sec_count
+        
+        # 풍선 효과
         st.balloons()
         
         # 결과 표시
         st.success("🎉 배정이 완료되었습니다!")
+        
+        # 결과표 출력
         res_df_list = []
-        for sec, names in results.items():
-            st.markdown(f"**[{sec}]**: {', '.join(names)}")
+        col1, col2 = st.columns(2) # 가독성을 위해 두 줄로 나눔
+        
+        for idx, (sec, names) in enumerate(results.items()):
+            target_col = col1 if idx % 2 == 0 else col2
+            with target_col:
+                st.markdown(f"**[{sec}]**")
+                st.write(f"{', '.join(names)}")
             res_df_list.append({"구역": sec, "배정인원": ", ".join(names)})
         
         # 4. 저장 기능 (웹에서는 다운로드 방식)
